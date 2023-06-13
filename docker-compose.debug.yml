@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  giasudaykem:
+    image: giasudaykem
+    build:
+      context: .
+      dockerfile: ./Dockerfile
