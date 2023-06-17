@@ -71,7 +71,6 @@
                                             <a class="dropdown-toggle" href="javascript:void(0)" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Xin chào, {{ Auth::user()->name }}</a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenu">
                                                 <a class="dropdown-item text-dark" href="{{ route('client.logout') }}">Đăng xuất</a>
-                                                <a class="dropdown-item text-dark" href="{{ route('client.editInfo') }}">Cập nhật thông tin</a>
                                             </div>
                                         </div>
                                     </li>

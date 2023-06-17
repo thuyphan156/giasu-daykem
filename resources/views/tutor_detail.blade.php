@@ -3,7 +3,7 @@
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
 <head>
-    <title>Chi tiết đánh giá </title>
+    <title>Chi Tiết Gia Sư</title>
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -129,8 +129,8 @@ a.dotted-link:hover {
 }
 .header {
   padding: 30px 0;
-  background: #f5f5f5;
-  border-top: 10px solid #778492;
+    border-radius: 12px 12px 0 0;
+    background: #f5f5f5;
 }
 .header .btn {
   margin-top: 60px;
@@ -144,6 +144,7 @@ a.dotted-link:hover {
   font-size: 38px;
   margin-bottom: 5px;
   margin-top: 30px;
+  font-weight: 700;
 }
 .header .profile-content .desc {
   color: #778492;
@@ -193,6 +194,7 @@ a.dotted-link:hover {
   margin-bottom: 30px;
   color: #545e69;
   font-size: 24px;
+  font-weight: 700;
 }
 .section .content .more-link .fa {
   margin-right: 5px;
@@ -454,7 +456,7 @@ a.dotted-link:hover {
   margin-bottom: 0;
 }
 .languages .item .fa {
-  color: #79d19a;
+  color: gold;
 }
 /* Blog Section */
 .blog .item {
@@ -546,218 +548,282 @@ a.dotted-link:hover {
     width: 1360px;
   }
 }
+.sidebar {
+  background-color: #f8f9fa; /* Set the background color of the sidebar */
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  color: #333; /* Set the text color of sidebar links */
+  text-decoration: none;
+}
+
+.sidebar ul li a:hover {
+  color: #555; /* Set the hover color of sidebar links */
+}
+.sidebar img {
+  width: 100%; /* Adjust the width as needed */
+  border-radius: 5px;
+}
 
     </style>
     
 </head> 
+@extends('client.layouts.index')
+<div class="site-section-cover overlay" style="background-image: url({{ asset('client/images/hero_bg.jpg') }});">
 
-<body>
-    <!-- ******HEADER****** --> 
-    <header class="header">
-        <div class="container">                       
-            <img style="    height: 136px
-            px
-            ;
-                width: 136px;
-                border-radius: 80px;" class="profile-image img-responsive pull-left" src="http://127.0.0.1:8000{{$user[0]->avatar}}" alt="James Lee" />
-            <div class="profile-content pull-left">
-                <h1 class="name">{{$user[0]->name}}</h1>
-               
-            </div><!--//profile-->
-          
-        </div><!--//container-->
-    </header><!--//header-->
-    
-    <div class="container sections-wrapper">
+  <div class="container">
+      <div class="row align-items-center justify-content-center">
+          <div class="col-lg-10 text-center">
+              <h3 class="text-white font-weight-bold">Chi tiết gia sư </h3>
+          </div>
+      </div>
+  </div>
+</div>
+<section style="    position: relative;
+        background-color: #e4e3e3;
+        top: -200px;
+        z-index: 1105;
+        width: 1529px;
+        left: 10%;
+        /* text-align: center; */
+        right: 40%;
+        align-items: center;
+        border-radius: 10px;">
+      <body>
+      <!-- ******HEADER****** --> 
+      <header class="header">
+          <div class="container">                       
+              <img style="    height: 136px
+              px
+              ;
+                  width: 136px;
+                  border-radius: 80px;" class="profile-image img-responsive pull-left" src="http://127.0.0.1:8000{{$user[0]->avatar}}" alt="James Lee" />
+              <div class="profile-content pull-left">
+                  <h1 class="name">{{ strtoupper($user[0]->name)}}</h1>
+                 
+              </div><!--//profile-->
+            
+          </div><!--//container-->
+      </header><!--//header-->
+      <div class="container">
         <div class="row">
-            <div class="primary col-md-8 col-sm-12 col-xs-12">
-                <section class="about section">
-                    <div class="section-inner">
-                        @php
-                            $classes = [];
-                            foreach (explode(',', $user[0]->classes) as $class) {
-                                $classes[] = \App\Models\Classes::find($class)->title;
-                            }
-                        @endphp
-                        <h2 class="heading">Lớp dạy</h2>
-                        <div class="content">
-                            <p>{{ implode(', ', $classes) }}</p>    
-         
-                              
-                         
-                        </div><!--//content-->
-                    </div><!--//section-inner-->                 
-                </section>
-                <section class="about section">
-                    <div class="section-inner">
-                        @php
-                        $subjects = [];
-                        foreach (explode(',', $user[0]->subjects) as $subject) {
-                            $subjects[] = \App\Models\Subject::find($subject)->title . ' - ' . \App\Models\Classes::find(\App\Models\Subject::find($subject)->class_id)->title;
-                        }
-                    @endphp
-                        <h2 class="heading">Môn dạy</h2>
-                        <div class="content">
-                            <p>{{ implode(', ', $subjects) }}</p>    
-         
-                               
-                         
-                        </div><!--//content-->
-                    </div><!--//section-inner-->                 
-                </section>
-                <aside class="languages aside section">
-                    <div class="section-inner">
-                        <h2 class="heading">Đánh giá</h2>
-                        <div class="content">
-                            <ul class="list-unstyled">
-                                @foreach($comment as $comment)
-                                <li class="item">
-                                    <span class="title"><strong>{{$comment->gmail_user}} :  </strong></span>
-                                    <span class="level">{{$comment->comment}}<br class="visible-xs"/>
-                                    @switch($comment->Point)
-                                        @case(1)
-                                            
-                                        <i class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i>    <i style="color: #434343" class="fa fa-star"></i>
-                                        @break
-                                        @case(2)
-                                        <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i>
-                                            @break
-                                            @case(3)
-                                            <i class="fa fa-star"></i> <i class="fa fa-star"></i><i class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i>
-                                                @break
-                                                @case(4)
-                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>  <i class="fa fa-star"></i> <i class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i>
-                                                    @break
-                                                    @case(5)
-                                                    <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i><i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                                        @break
-                                                       
 
-                                        @default
-                                            
-                                    @endswitch
-                                    </span>
-                                   
-                                </li><!--//item-->
-                                @endforeach
-                             
-                            </ul>
-                        </div><!--//content-->
-                    </div><!--//section-inner-->
-                </aside><!--
-   
-                
- 
-                <section class="github section">
-
-                </section><!--//section-->
-            </div><!--//primary-->
-            <div class="secondary col-md-4 col-sm-12 col-xs-12">
-       
-                @php
-                $districts = [];
-                foreach (explode(',', $user[0]->districts) as $district) {
-                    $districts[] = \Vanthao03596\HCVN\Models\District::find($district)->name;
-                }
-            @endphp
-                <aside class="testimonials aside section">
-                    <div class="section-inner">
-                        <h2 class="heading">Khu vực dạy</h2>
-                        <div class="content">
-                            <div class="item">
-                                <blockquote class="quote">                                  
+          <div class="col-md-12">
+            <div class="container sections-wrapper">
+              <div class="row">
+                  <div class="primary col-md-12 col-sm-12 col-xs-12">
+                      <section class="about section">
+                          <div class="section-inner">
+                              @php
+                                  $classes = [];
+                                  foreach (explode(',', $user[0]->classes) as $class) {
+                                      $classes[] = \App\Models\Classes::find($class)->title;
+                                  }
+                              @endphp
+                              <h2 class="heading">Lớp dạy</h2>
+                              <div class="content">
+                                  <p>{{ implode(', ', $classes) }}</p>    
+               
                                     
-                                </blockquote>                
-                                <p class="source"><span class="name">{{ implode(', ', $districts) }}</span><br /><span class="title"></span></p>                                                             
-                            </div><!--//item-->
-                            
-                          
-                            
-                        </div><!--//content-->
-                    </div><!--//section-inner-->
-                </aside><!--//section-->
-                
-                <aside class="education aside section">
-                    <div class="section-inner">
-                        <h2 class="heading">Thời gian dạy</h2>
-                        <div class="content">
-                            <div class="item">                      
-                               <p>{{ $user[0]->times }}</p>
-                            </div><!--//item-->
-                        </div><!--//content-->
-                    </div><!--//section-inner-->
-                </aside><!--//section-->
-           <!--//section-->
+                               
+                              </div><!--//content-->
+                          </div><!--//section-inner-->                 
+                      </section>
+                      <section class="about section">
+                          <div class="section-inner">
+                              @php
+                              $subjects = [];
+                              foreach (explode(',', $user[0]->subjects) as $subject) {
+                                  $subjects[] = \App\Models\Subject::find($subject)->title . ' - ' . \App\Models\Classes::find(\App\Models\Subject::find($subject)->class_id)->title;
+                              }
+                          @endphp
+                              <h2 class="heading">Môn dạy</h2>
+                              <div class="content">
+                                  <p>{{ implode(', ', $subjects) }}</p>    
+               
+                                     
+                               
+                              </div><!--//content-->
+                          </div><!--//section-inner-->                 
+                      </section>
+                      @php
+                      $districts = [];
+                      foreach (explode(',', $user[0]->districts) as $district) {
+                          $districts[] = \Vanthao03596\HCVN\Models\District::find($district)->name;
+                      }
+                  @endphp
+                      <aside class="testimonials aside section">
+                          <div class="section-inner">
+                              <h2 class="heading">Khu vực dạy</h2>
+                              <div class="content">
+                                  <div class="item">
+                                      <blockquote class="quote">                                  
+                                          
+                                      </blockquote>                
+                                      <p class="source"><span class="name">{{ implode(', ', $districts) }}</span><br /><span class="title"></span></p>                                                             
+                                  </div><!--//item-->
+                                  
+                                
+                                  
+                              </div><!--//content-->
+                          </div><!--//section-inner-->
+                      </aside><!--//section-->
+                      
+                      <aside class="education aside section">
+                          <div class="section-inner">
+                              <h2 class="heading">Thời gian dạy</h2>
+                              <div class="content">
+                                  <div class="item">                      
+                                     <p>{{ $user[0]->times }}</p>
+                                  </div><!--//item-->
+                              </div><!--//content-->
+                          </div><!--//section-inner-->
+                      </aside><!--//section-->
+                 <!--//section-->
+                      <aside class="languages aside section">
+                          <div class="section-inner">
+                              <h2 class="heading">Đánh giá</h2>
+                              <div class="content">
+                                  <ul class="list-unstyled">
+                                      @foreach($comment as $comment)
+                                      <li class="item">
+                                          <span class="title"><strong>{{$comment->gmail_user}} :  </strong></span>
+                                          <span class="level">{{$comment->comment}}<br class="visible-xs"/>
+                                          @switch($comment->Point)
+                                              @case(1)
+                                                  
+                                              <i class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i>  
+                                              @break
+                                              @case(2)
+                                              <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i>
+                                                  @break
+                                                  @case(3)
+                                                  <i class="fa fa-star"></i> <i class="fa fa-star"></i><i class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i>
+                                                      @break
+                                                      @case(4)
+                                                      <i class="fa fa-star"></i> <i class="fa fa-star"></i>  <i class="fa fa-star"></i> <i class="fa fa-star"></i><i style="color: #434343" class="fa fa-star"></i>
+                                                          @break
+                                                          @case(5)
+                                                          <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i><i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                                              @break
+                                              @default
+                                                  
+                                          @endswitch
+                                          </span>
+                                         
+                                      </li><!--//item-->
+                                      @endforeach
+                                   
+                                  </ul>
+                              </div><!--//content-->
+                          </div><!--//section-inner-->
+                      </aside><!--
+         
+                      
+       
+                      <section class="github section">
+      
+                      </section><!--//section-->
+                  </div><!--//primary-->
+            <div class="secondary col-md-4 col-sm-12 col-xs-12">
+             
+                      @php
+                      $districts = [];
+                      foreach (explode(',', $user[0]->districts) as $district) {
+                          $districts[] = \Vanthao03596\HCVN\Models\District::find($district)->name;
+                      }
+                  @endphp
+                 
+                 <!--//section-->
+      
+                      
+          
+                    
+                  </div><!--//secondary-->    
+              </div><!--//row-->
+          </div>
+          </div>
 
-                
-    
-              
-            </div><!--//secondary-->    
-        </div><!--//row-->
-    </div><!--//masonry-->
-    
-    <!-- ******FOOTER****** --> 
-
- 
-    <!-- Javascript -->          
-    <script type="text/javascript" src="assets/plugins/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>    
-    <script type="text/javascript" src="assets/plugins/jquery-rss/dist/jquery.rss.min.js"></script> 
-    <!-- github activity plugin -->
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
-    <script type="text/javascript" src="http://caseyscarborough.github.io/github-activity/github-activity-0.1.0.min.js"></script>
-    <!-- custom js -->
-    <script>
-        jQuery(document).ready(function($){$(".level-bar-inner").css("width","0"),$(window).on("load",function(){$(".level-bar-inner").each(function(){var e=$(this).data("level");$(this).animate({width:e},800)})}),$(".level-label").tooltip(),$("#rss-feeds").rss("http://feeds.feedburner.com/TechCrunch/startups",{limit:3,effect:"slideFastSynced",layoutTemplate:"<div class='item'>{entries}</div>",entryTemplate:'<h3 class="title"><a href="{url}" target="_blank">{title}</a></h3><div><p>{shortBodyPlain}</p><a class="more-link" href="{url}" target="_blank"><i class="fa fa-external-link"></i>Read more</a></div>'})});
-        jQuery(document).ready(function($) {
-
-
-/*======= Skillset *=======*/
-
-$('.level-bar-inner').css('width', '0');
-
-$(window).on('load', function() {
-
-    $('.level-bar-inner').each(function() {
-    
-        var itemWidth = $(this).data('level');
-        
-        $(this).animate({
-            width: itemWidth
-        }, 800);
-        
-    });
-
-});
-
-/* Bootstrap Tooltip for Skillset */
-$('.level-label').tooltip();
-
-
-$("#rss-feeds").rss(
-
-    //Change this to your own rss feeds
-    "http://feeds.feedburner.com/TechCrunch/startups",
-    
-    {
-
-    limit: 3,
+        </div>
+      </div>
+   <!--//masonry-->
+      
+      <!-- ******FOOTER****** --> 
+  
    
-    effect: 'slideFastSynced',
-    layoutTemplate: "<div class='item'>{entries}</div>",
-    entryTemplate: '<h3 class="title"><a href="{url}" target="_blank">{title}</a></h3><div><p>{shortBodyPlain}</p><a class="more-link" href="{url}" target="_blank"><i class="fa fa-external-link"></i>Read more</a></div>'
-    
-    }
-);
-
-/* Github Activity Feed - https://github.com/caseyscarborough/github-activity */
-GitHubActivity.feed({ username: "caseyscarborough", selector: "#ghfeed" });
-
-
-});
-    </script>
-    <script type="text/javascript" src="assets/js/main.js"></script>            
-</body>
+      <!-- Javascript -->          
+      <script type="text/javascript" src="assets/plugins/jquery-1.11.1.min.js"></script>
+      <script type="text/javascript" src="assets/plugins/jquery-migrate-1.2.1.min.js"></script>
+      <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>    
+      <script type="text/javascript" src="assets/plugins/jquery-rss/dist/jquery.rss.min.js"></script> 
+      <!-- github activity plugin -->
+      <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.2/mustache.min.js"></script>
+      <script type="text/javascript" src="http://caseyscarborough.github.io/github-activity/github-activity-0.1.0.min.js"></script>
+      <!-- custom js -->
+      <script>
+          jQuery(document).ready(function($){$(".level-bar-inner").css("width","0"),$(window).on("load",function(){$(".level-bar-inner").each(function(){var e=$(this).data("level");$(this).animate({width:e},800)})}),$(".level-label").tooltip(),$("#rss-feeds").rss("http://feeds.feedburner.com/TechCrunch/startups",{limit:3,effect:"slideFastSynced",layoutTemplate:"<div class='item'>{entries}</div>",entryTemplate:'<h3 class="title"><a href="{url}" target="_blank">{title}</a></h3><div><p>{shortBodyPlain}</p><a class="more-link" href="{url}" target="_blank"><i class="fa fa-external-link"></i>Read more</a></div>'})});
+          jQuery(document).ready(function($) {
+  
+  
+  /*======= Skillset *=======*/
+  
+  $('.level-bar-inner').css('width', '0');
+  
+  $(window).on('load', function() {
+  
+      $('.level-bar-inner').each(function() {
+      
+          var itemWidth = $(this).data('level');
+          
+          $(this).animate({
+              width: itemWidth
+          }, 800);
+          
+      });
+  
+  });
+  
+  /* Bootstrap Tooltip for Skillset */
+  $('.level-label').tooltip();
+  
+  
+  $("#rss-feeds").rss(
+  
+      //Change this to your own rss feeds
+      "http://feeds.feedburner.com/TechCrunch/startups",
+      
+      {
+  
+      limit: 3,
+     
+      effect: 'slideFastSynced',
+      layoutTemplate: "<div class='item'>{entries}</div>",
+      entryTemplate: '<h3 class="title"><a href="{url}" target="_blank">{title}</a></h3><div><p>{shortBodyPlain}</p><a class="more-link" href="{url}" target="_blank"><i class="fa fa-external-link"></i>Read more</a></div>'
+      
+      }
+  );
+  
+  /* Github Activity Feed - https://github.com/caseyscarborough/github-activity */
+  GitHubActivity.feed({ username: "caseyscarborough", selector: "#ghfeed" });
+  
+  
+  });
+      </script>
+      <script type="text/javascript" src="assets/js/main.js"></script>            
+  </body>
+  
+</section>
 </html> 
 

@@ -22,8 +22,6 @@ Route::namespace('Client')->group(function () {
     Route::get('/login', 'LoginController@showLogin')->name('client.show.login');
     Route::post('/login', 'LoginController@login')->name('client.post.login');
     Route::get('/logout', 'LoginController@logout')->name('client.logout');
-    Route::get('/edit-infor-client', 'TeacherController@editInfor')->name('client.editInfo');
-    Route::post('/update-infor-client', 'TeacherController@updateInfor')->name('client.updateInfo');
     Route::get('/register-teacher', 'TeacherController@registerTeacher')->name('client.register.teacher');
     Route::post('/register-teacher', 'TeacherController@handleRegisterTeacher')->name('client.handle.register.teacher');
     Route::get('/ajax-class', 'TeacherController@ajaxClass');

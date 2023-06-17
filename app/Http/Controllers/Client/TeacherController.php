@@ -83,13 +83,4 @@ class TeacherController extends Controller
             'districts' => $districts
         ]);
     }
-    public function editInfor(){
-        if(!auth()->user()){
-            return redirect()->route('client.home');
-        }
-        return 'ok';
-    }
-    public function updateInfor (){
-
-    }
 }
